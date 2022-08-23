@@ -42,34 +42,25 @@ public class Archv {
                             }
                         }
                         if (spl[i].charAt(spl[i].length() - 1) == '%') {
-                            //System.out.println("BR");
+
                             spl[i] = spl[i].substring(0, spl[i].length() - 1);
                         }
-                        //datos2.set(i, datos);
+
                         datos.add(spl[i]);
                     }
-                    /*  System.out.print("  Linea=="+ lines);
-                    System.out.print("  Datos=="+ datos.size());
-                    System.out.println("  Datos 2=="+ datos2.size());                    
-                    // System.out.println(pr.toString());
-                    //System.out.println(Arrays.toString(spl));
-                   // System.out.println("datos1. "+datos.toString());*/
+
                     datos2.add(datos);
 
-                    //System.out.println(datos2.get(0));
-                    //datos.clclear();
                 }
                 head++;
-                //System.out.println("-->"+ datos2.size());
-                lines++;
+
             }//while
-            // System.out.println("  Datos 2=====>"+ datos2.size());                    
-            for (int idx=0; idx < datos2.size(); idx++)
-            { //System.out.println("  uno");                    
-                System.out.println (" Datos 2" +datos2.get(idx).toString());
+
+            for (int idx = 0; idx < datos2.size(); idx++) {
+                System.out.println(" Datos 2" + datos2.get(idx).toString());
             }
             opciones();
-            //System.out.println("**" + datos2.get(1).get(1));
+
         } catch (Exception e) {
             System.out.println("Exepcion");
             return;
@@ -89,7 +80,7 @@ public class Archv {
                 System.out.println("publicaciones(3),publicaciones(4),me gusta(5),compartidas(6),comentarios(7)");
                 String fb = opc.readLine();
                 int fbk = Integer.parseInt(fb);
-                if ( fbk>8 & fbk <0) {
+                if (fbk > 8 & fbk < 0) {
                     System.out.println("Introdusca un numero valido");
                     return;
                 }
@@ -101,24 +92,24 @@ public class Archv {
                 System.out.println("publicaciones(3),retuit(4),me gusta(5),impactos(6)");
                 String tw = opc.readLine();
                 int twt = Integer.parseInt(tw);
-                if ( twt>8 & twt <0) {
+                if (twt > 8 & twt < 0) {
                     System.out.println("Introdusca un numero valido");
                     return;
                 }
                 twt += 7;
-                impDatos( twt);
+                impDatos(twt);
                 break;
             case 3:
                 System.out.println("Seleccione un concepto:");
                 System.out.println("videos(0),visualizaciones(1),comentarios(2),me gusta(3)");
                 String yt = opc.readLine();
                 int ytb = Integer.parseInt(yt);
-                if ( ytb>8 & ytb<0) {
+                if (ytb > 8 & ytb < 0) {
                     System.out.println("Introdusca un numero valido");
                     return;
                 }
                 ytb += 14;
-                impDatos( ytb);
+                impDatos(ytb);
                 break;
             default:
                 System.out.println("Intridusca un numero valido.");
@@ -127,31 +118,36 @@ public class Archv {
 
     }
 
-    public void impDatos( int concepto) throws IOException {
+    public void impDatos(int concepto) {
         System.out.println("Calcular:");
         System.out.println("Diferencia(1)-Promedio(2)");
-        BufferedReader opc = new BufferedReader(new InputStreamReader(System.in));
-        String operacion = opc.readLine();
-        int op = Integer.parseInt(operacion);
-        switch (op) {
-            case 1:
-                System.out.println("Indique dos meses:");
-                System.out.println("Enero(0),Febrero(1),Marzo(2),Abril(3),Mayo(4),Junio(5)");
-                String mes1 = opc.readLine();
-                int m1 = Integer.parseInt(mes1);
-                String mes2 = opc.readLine();
-                int m2 = Integer.parseInt(mes2);
-                int dif = Integer.parseInt(datos2.get(concepto).get(m2+3))-Integer.parseInt(datos2.get(concepto).get(m1+3));
-                System.out.println(dif);
-                break;
-            case 2:
-                int prom = (Integer.parseInt(datos2.get(concepto).get(3))+Integer.parseInt(datos2.get(concepto).get(4))+
-                        Integer.parseInt(datos2.get(concepto).get(5))+Integer.parseInt(datos2.get(concepto).get(6))+
-                        Integer.parseInt(datos2.get(concepto).get(7))+Integer.parseInt(datos2.get(concepto).get(8)))/5;
-                System.out.println("El promedio es:" + prom);
-                break;
-            default:
-                throw new AssertionError();
+        try {
+            BufferedReader opc = new BufferedReader(new InputStreamReader(System.in));
+            String operacion = opc.readLine();
+            int op = Integer.parseInt(operacion);
+            switch (op) {
+                case 1:
+                    System.out.println("Indique dos meses:");
+                    System.out.println("Enero(0),Febrero(1),Marzo(2),Abril(3),Mayo(4),Junio(5)");
+                    String mes1 = opc.readLine();
+                    int m1 = Integer.parseInt(mes1);
+                    String mes2 = opc.readLine();
+                    int m2 = Integer.parseInt(mes2);
+                    int dif = Integer.parseInt(datos2.get(concepto).get(m2 + 3)) - Integer.parseInt(datos2.get(concepto).get(m1 + 3));
+                    System.out.println(dif);
+                    break;
+                case 2:
+                    int prom = (Integer.parseInt(datos2.get(concepto).get(3)) + Integer.parseInt(datos2.get(concepto).get(4))
+                            + Integer.parseInt(datos2.get(concepto).get(5)) + Integer.parseInt(datos2.get(concepto).get(6))
+                            + Integer.parseInt(datos2.get(concepto).get(7)) + Integer.parseInt(datos2.get(concepto).get(8))) / 5;
+                    System.out.println("El promedio es:" + prom);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        } catch (Exception e) {
+            System.out.println("Exepcion impDatos.");
+            return;
         }
     }
 }
